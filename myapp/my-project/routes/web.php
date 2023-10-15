@@ -23,6 +23,7 @@ use Inertia\Inertia;
 Route::get('/my', [MyPageController::class, 'show']);
 Route::get('/contacts', [ContactsPageController::class, 'show']);
 
+//Авторизация
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
