@@ -21,6 +21,11 @@ use Inertia\Inertia;
 //Cамокопание
 //Подключение созданного контроллера
 Route::get('/my', [MyPageController::class, 'show']);
+//Роут на создание записи
+Route::get('/my/create', [MyPageController::class, 'create']);
+//Роут на обновление записи
+Route::get('/my/update', [MyPageController::class, 'update']);
+
 Route::get('/contacts', [ContactsPageController::class, 'show']);
 
 //Авторизация

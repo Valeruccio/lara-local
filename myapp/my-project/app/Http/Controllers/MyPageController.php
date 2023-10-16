@@ -43,15 +43,49 @@ echo "<pre>";
         //Вычленить из атрибутов
         $post->title;
 
+    }
+
+    public function create() {
+        $postArr = [
+            [
+               'userid' => '1',
+               'title' => 'test',
+               'content' => 'test',
+               'image' => 'test',
+               'likes' => 2,
+               'is_published' => 1,
+            ],
+            [
+                'userid' => '1',
+                'title' => 'fest',
+                'content' => 'fest',
+                'image' => 'fest',
+                'likes' => 4,
+                'is_published' => 1,
+            ],
+        ];
+
+        Post::create([
+            'userid' => 1,
+            'title' => 'fest',
+            'content' => 'fest',
+            'image' => 'fest',
+            'likes' => 4,
+            'is_published' => 1,
+        ]);
         ini_set("xdebug.overload_var_dump", "off");
         echo "<pre>";
                     dd(
                         __FILE__,
                         __LINE__,
                         'Valeriy Tyulin',
-                        $post
+        'yeah'
                     );
                     echo "</pre>";
                     die;
+    }
+
+    public function update() {
+
     }
 }
