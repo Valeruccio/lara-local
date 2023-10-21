@@ -25,6 +25,14 @@ Route::get('/my', [MyPageController::class, 'show']);
 Route::get('/my/create', [MyPageController::class, 'create']);
 //Роут на обновление записи
 Route::get('/my/update', [MyPageController::class, 'update']);
+//Роут на удаление записи
+Route::get('/my/delete', [MyPageController::class, 'delete']);
+//Роут на восстановление записи
+Route::get('/my/restore', [MyPageController::class, 'restore']);
+//Первый или создать
+Route::get('/my/first_or_create', [MyPageController::class, 'firstOrCreate']);
+//Обновить или создать
+Route::get('/my/update_or_create', [MyPageController::class, 'updateOrCreate']);
 
 Route::get('/contacts', [ContactsPageController::class, 'show']);
 

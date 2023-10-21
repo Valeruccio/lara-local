@@ -1,0 +1,253 @@
+В Laravel есть потрясающий набор artisan команд, из которых чаще всего используется make:xxx — например, make:model или make:migration и т. Д. Но знаете ли вы их все? Знаете ли их параметры, которые могут помочь сделать код еще быстрее?
+
+Во-первых, есть команда php artisan list, которая выдаст нам все команды:
+
+make:auth            Scaffold basic login and registration views and routes
+make:channel         Create a new channel class
+make:command         Create a new Artisan command
+make:controller      Create a new controller class
+make:event           Create a new event class
+make:exception       Create a new custom exception class
+make:factory         Create a new model factory
+make:job             Create a new job class
+make:listener        Create a new event listener class
+make:mail            Create a new email class
+make:middleware      Create a new middleware class
+make:migration       Create a new migration file
+make:model           Create a new Eloquent model class
+make:notification    Create a new notification class
+make:observer        Create a new observer class
+make:policy          Create a new policy class
+make:provider        Create a new service provider class
+make:request         Create a new form request class
+make:resource        Create a new resource
+make:rule            Create a new validation rule
+make:seeder          Create a new seeder class
+make:test            Create a new test class
+make:widget          Create a new widget (arrilot/laravel-widgets)
+Но это не даст нам никакой информации о параметрах и опциях этих команд. Я расскажу вам об этом подробно, начиная с наиболее используемых.
+
+Для этого мы углубимся в код фреймворка, находящийся в папке /vendor/laravel/framework/src/Illuminate, и проверим, какие опции и недокументированные функции есть у этих команд.
+
+
+
+1. make:controller
+Эта команда создает новый файл контроллера в папке app/Http/Controllers.
+
+Пример использования:
+
+php artisan make:controller UserController
+Параметры:
+
+—resource
+Контроллер будет содержать методы для каждой из доступных операций с ресурсами — index(), create(), store(), show(), edit(), update(), destroy().
+
+—model=Photo
+Если нужно, чтобы методы контроллера указывали на экземпляр модели.
+
+—parent=Photo
+Недокументированный параметр, в коде написано «Генерирует вложенный класс контроллера ресурсов», но мне не удалось сгенерировать контроллер таким образом. Вероятно, работа над этим параметром еще в процессе.
+
+
+
+2. make:model
+Создает новый класс Eloquent модели.
+
+Пример использования:
+
+php artisan make:model Photo
+Параметры:
+
+—migration
+Создает новый файл миграции для модели.
+
+—controller
+Создает новый контроллер для модели.
+
+—resource
+Указывает, что сгенерированный контроллер должен контроллером ресурсов.
+
+Да, вы правильно поняли, вы можете сделать так:
+
+php artisan make:model Project --migration --controller --resource
+Или даже короче:
+
+php artisan make:model Project -mcr
+
+
+3. make:migration
+Создает новый файл миграции.
+
+Пример использования:
+
+php artisan make:migration create_projects_table
+Параметры:
+
+—create=Table
+Таблица, которая будет создана.
+
+—table=Table
+Таблица для миграции.
+
+—path=Path
+Место, где будет создан файл миграции.
+
+
+
+4. make:seeder
+Создает новый класс наполнения базы данных.
+
+Пример использования:
+
+php artisan make:seeder BooksTableSeeder
+Параметры: нет.
+
+
+
+5. make:request
+Создает новый класс валидации форм в папке app/Http/Requests.
+
+Пример использования:
+
+php artisan make:request StoreBlogPost
+Параметры: нет.
+
+
+
+6. make:middleware
+Создает новый класс посредника.
+
+Пример использования:
+
+php artisan make:middleware CheckAge
+Параметры: нет.
+
+
+
+7. make:policy
+Создает новый класс политики.
+
+Пример использования:
+
+php artisan make:policy PostPolicy
+Параметры:
+
+—model=Photo
+Модель, к которой применяется политика.
+
+
+
+8. make:auth
+Пример использования:
+
+php artisan make:auth
+Шаблоны и маршруты для логина и регистрации.
+
+Параметры:
+
+—views
+Только шаблоны аутентификации.
+
+—force
+Перезаписать существующие шаблоны по умолчанию.
+
+
+
+9. make:command
+Создает новую команду Artisan.
+
+Пример использования:
+
+php artisan make:command SendEmails
+Параметры:
+
+—command=Command
+Назначаем терминальную команду.
+
+
+
+10. make:event
+Создает новый класс событий.
+
+Пример использования:
+
+php artisan make:event OrderShipped
+Параметры: нет.
+
+
+
+11. make:job
+Создает новый класс отложенных задач
+
+Пример использования:
+
+php artisan make:job SendReminderEmail
+Параметры:
+
+—sync
+Задача должна быть синхронной.
+
+
+
+12. make:listener
+Создает новый класс слушателя событий
+
+Пример использования:
+
+php artisan make:listener SendShipmentNotification
+Параметры:
+
+—event=Event
+Класс, который будет прослушиваться.
+
+—queued
+Указывает, что слушатель должен быть поставлен в очередь.
+
+
+
+13. make:mail
+Создает новый почтовый класс.
+
+Пример использования:
+
+php artisan make:mail OrderShipped
+Параметры:
+
+—markdown
+Создает новый Markdown-шаблон для писем
+
+
+
+14. make:notification
+Создает новый класс уведомлений.
+
+Пример использования:
+
+php artisan make:notification InvoicePaid
+Параметры:
+
+—markdown
+Создает новый Markdown-шаблон для уведомлений.
+
+
+
+15. make:provider
+Создает новый класс провайдера
+
+Пример использования:
+
+php artisan make:provider RiakServiceProvider
+Параметры: нет.
+
+
+
+16. make:test
+Создает новый класс тестирования.
+
+Пример использования:
+
+php artisan make:test UserTest
+Параметры:
+
+—unit
+Создает модуль теста.

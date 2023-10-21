@@ -22,26 +22,26 @@ class MyPageController extends Controller
         //Условие где получаем
         $postswhere = Post::where('is_published', 1)->get();
         //Условие где получаем только первый
-        $postswhere = Post::where('is_published', 1)->first();
+//        $postswherefirst = Post::where('is_published', 1)->first();
 
         foreach ($postswhere as $item) {
             echo  $item->title;
             echo '<br>';
         }
 
-ini_set("xdebug.overload_var_dump", "off");
-echo "<pre>";
-            dd(
-                __FILE__,
-                __LINE__,
-                'Valeriy Tyulin',
-                $postswhere
-            );
-            echo "</pre>";
-            die;
+//ini_set("xdebug.overload_var_dump", "off");
+//echo "<pre>";
+//            dd(
+//                __FILE__,
+//                __LINE__,
+//                'Valeriy Tyulin',
+//                $postswhere
+//            );
+//            echo "</pre>";
+//            die;
 
-        //Вычленить из атрибутов
-        $post->title;
+//        //Вычленить из атрибутов
+//        $post->title;
 
     }
 
@@ -86,6 +86,72 @@ echo "<pre>";
     }
 
     public function update() {
+        $post = Post::find(1);
 
+        $post->update([
+            'is_published' => 1,
+            'title' => 'rem',
+        ]);
+        $postswherefirst = Post::where('is_published', 1)->first();
+        echo $postswherefirst->title;
     }
+
+    public function delete() {
+        $post = Post::find(5);
+
+        if ($post) {
+            //грубый способ
+            $post->delete();
+            //Мягкий способ
+            $post->softDeletes();
+        }
+
+
+        dd('delete');
+    }
+
+    //Востановление данных
+    public function restore() {
+        //С мусором!
+        $post = Post::withTrashed()->find(5);
+        $post->restore();
+        dd($post);
+    }
+
+    //firstOrCreate
+    //updateOrCreate
+    //создать если нет такого, получить если есть такой
+    public function firstOrCreate() {
+
+        $post = Post::firstOrCreate([
+            'title' => 'rem'
+        ], [
+            'userid' => 1,
+            'title' => 'fest',
+            'content' => 'fest',
+            'image' => 'fest',
+            'likes' => 4,
+            'is_published' => 1,
+        ]);
+
+        dd($post);
+    }
+
+    //создать если нет такого, обновить если есть такой
+    public function updateOrCreate() {
+
+        $post = Post::updateOrCreate([
+            'title' => 'rem'
+        ], [
+            'userid' => 1,
+            'title' => 'festr',
+            'content' => 'festr',
+            'image' => 'festr',
+            'likes' => 4,
+            'is_published' => 1,
+        ]);
+
+        dd($post->title);
+    }
+
 }
