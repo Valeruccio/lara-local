@@ -1,0 +1,22 @@
+1. Начало
+1.1. Все запросы начинаются public/index.php
+1.2. Он же загружает загрузчик приложения bootstrap/app.php
+
+HTTP-ядро и ядро консоли
+1.3. app/Http/Kernel.php дочерний от Illuminate\Foundation\Http\Kernel
+1.4. Все поставщики служб приложения настраиваются в массиве providers конфигурационного файла config/app.php.
+
+Основы маршрутизации
+2. Простейшие маршруты Laravel принимают URI и
+замыкание, обеспечивая нетрудоемкий и выразительный
+метод определения маршрутов и поведения без сложных
+конфигурационных файлов маршрутизации:
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/greeting', function () {
+    return 'Hello World';
+});
+
+Добавить поле миграция
+# php artisan make:migration add_column_description_to_posts

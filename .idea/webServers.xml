@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b4ca4bdc-ad13-45d6-8937-8d16311c0e62" name="lara-local" url="http://localhost:8000">
+        <fileTransfer mountedRoot="C:\Users\Валера\PhpstormProjects\lara-local\myapp\my-project" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>
